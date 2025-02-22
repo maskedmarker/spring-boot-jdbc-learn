@@ -10,6 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>ch00-commons</module>
+        <module>ch01-spring-jdbc</module>
+        <module>ch02-spring-jpa</module>
     </modules>
 
     <properties>
