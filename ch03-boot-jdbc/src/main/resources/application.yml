@@ -1,0 +1,20 @@
+# spring
+spring:
+  application:
+    name: hello-boot-jdbc
+  datasource:
+    url: jdbc:h2:tcp://localhost:9092/mem:test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    platform: h2
+    schema: classpath:schema.sql #可以自定义文件名,当有该配置项时,会被auto-configure执行
+    data: classpath:data.sql #可以自定义文件名,当有该配置项时,会被auto-configure执行
+
+
+# logging
+logging:
+  level:
+    root: INFO
+#    org.springframework: INFO
+    org.example.learn: DEBUG

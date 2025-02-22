@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <!-- 上面的status指的是Log4j 自身内部的日志级别，可以帮助调试 Log4j 的配置问题 -->
+
+    <Properties>
+        <Property name="LOG_PATTERN">[%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}] [%-5p] [%t] [%c:%M:%L] - %m%n</Property>
+    </Properties>
+
+    <!-- 定义日志上下文 -->
+    <Appenders>
+        <!-- 控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- 日志文件输出 -->
+        <File name="File" fileName="logs/app.log" append="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+
+        <!-- 带时间滚动的日志文件输出 -->
+        <RollingFile name="RollingFile" fileName="logs/application.log" filePattern="logs/application-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="7"/>
+        </RollingFile>
+    </Appenders>
+
+    <!-- 配置日志记录器 -->
+    <Loggers>
+        <logger name="org.example.learn" additivity="false">
+            <AppenderRef ref="Console"/>
+        </logger>
+        <!-- 设置根日志记录器 -->
+        <Root>
+            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="RollingFile"/>-->
+        </Root>
+    </Loggers>
+</Configuration>
