@@ -8,8 +8,8 @@ spring:
     username: sa
     password:
     platform: h2
-    schema: classpath:schema.sql #可以自定义文件名,当有该配置项时,会被auto-configure执行
-    data: classpath:data.sql #可以自定义文件名,当有该配置项时,会被auto-configure执行
+    schema: classpath:schema.sql #可以自定义文件名
+    data: classpath:data.sql #可以自定义文件名
 
 
 # logging

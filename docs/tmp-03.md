@@ -48,3 +48,42 @@ public class DataSourceAutoConfiguration {
 	protected static class PooledDataSourceConfiguration {
 	}
 ```
+
+### DataSourceInitializationConfiguration
+
+最终执行datasource初始化脚本的是DataSourceInitializerInvoker
+
+```text
+@Configuration(proxyBeanMethods = false)
+@Import({ DataSourceInitializerInvoker.class, DataSourceInitializationConfiguration.Registrar.class })
+class DataSourceInitializationConfiguration {
+
+	static class Registrar implements ImportBeanDefinitionRegistrar {
+
+		private static final String BEAN_NAME = "dataSourceInitializerPostProcessor";
+
+		@Override
+		public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
+				BeanDefinitionRegistry registry) {
+			if (!registry.containsBeanDefinition(BEAN_NAME)) {
+				GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+				beanDefinition.setBeanClass(DataSourceInitializerPostProcessor.class);
+				beanDefinition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
+				// We don't need this one to be post processed otherwise it can cause a cascade of bean instantiation that we would rather avoid.
+				beanDefinition.setSynthetic(true);
+				registry.registerBeanDefinition(BEAN_NAME, beanDefinition);
+			}
+		}
+	}
+}
+```
+
+
+DataSourceInitializerInvoker
+
+默认执行classpath下的schema-*.sql和data-*.sql.
+可以在配置文件中指定相应的文件名
+
+```text
+Bean to handle DataSource initialization by running schema-*.sql on InitializingBean.afterPropertiesSet() and data-*.sql SQL scripts on a DataSourceSchemaCreatedEvent.
+```
