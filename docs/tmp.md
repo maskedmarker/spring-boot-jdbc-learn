@@ -54,21 +54,3 @@ public class AopAutoConfiguration {
 	}
 }
 ```
-
-```text
-InfrastructureAdvisorAutoProxyCreator是 SmartInstantiationAwareBeanPostProcessor
-
-org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization
-    org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.wrapIfNecessary
-        org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.getAdvicesAndAdvisorsForBean
-        org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.createProxy
-            ProxyFactory proxyFactory = new ProxyFactory();
-            buildAdvisors
-            customizeProxyFactory
-            proxyFactory.getProxy
-            
-            
-
-org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.buildAdvisors
-            
-```
