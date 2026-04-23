@@ -22,7 +22,6 @@ public class UserDaoImpl implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Transactional
     @Override
     public User findById(Integer id) {
         String sql = "SELECT id, name, email, create_time, update_time FROM user WHERE id = ?";
@@ -64,6 +63,7 @@ public class UserDaoImpl implements UserDao {
         return 1;
     }
 
+    @Transactional
     @Override
     public int update(User user) {
         String sql = "UPDATE user SET name = ?, email = ? WHERE id = ?";
