@@ -3,8 +3,8 @@ spring:
   application:
     name: hello-boot-jdbc-test
   datasource:
-    # 使用嵌入式H2数据库，不需要TCP服务器
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    # 使用嵌入式H2数据库，不需要TCP服务器,打印sql日志
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;TRACE_LEVEL_SYSTEM_OUT=2
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -21,4 +21,4 @@ logging:
   level:
     root: INFO
     org.example.learn: DEBUG
-    org.springframework.jdbc: DEBUG
+    org.springframework.jdbc: INFO

@@ -16,5 +16,5 @@ spring:
 logging:
   level:
     root: INFO
-#    org.springframework: INFO
+    org.springframework.jdbc.core: INFO  # 打印 SQL 语句
     org.example.learn: DEBUG
